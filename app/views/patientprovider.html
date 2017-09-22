@@ -1,0 +1,74 @@
+<!-- <div class="alert alert-info">
+        Username: test<br />
+        Password: test
+    </div> -->
+<h2>Search Filters</h2>
+<!-- <form name="form" ng-submit="form.$valid && vm.login()" novalidate> -->
+<div class="row row-space">
+	<label class="col-sm-2">Minimum Discharges</label>
+	<div class="col-sm-2"><input type="text" ng-model="vm.filter.min_discharges" class="form-control" /></div>
+	<label class="col-sm-2">Maximum Discharges</label>
+	<div class="col-sm-2"><input type="text" ng-model="vm.filter.max_discharges" class="form-control" /></div>
+	<label class="col-sm-1">State</label>
+	<div class="col-sm-2"><input type="text" ng-model="vm.filter.state" class="form-control" /></div>
+
+</div>
+<div style="clear:both"></div>
+<div class="row row-space">
+	<label class="col-sm-2">Min Average Covered Charges</label>
+	<div class="col-sm-2"><input type="text" ng-model="vm.filter.min_avg_covered_charges" class="form-control" /></div>
+	<label class="col-sm-2">Max Average Covered Charges</label>
+	<div class="col-sm-2"><input type="text"  ng-model="vm.filter.max_avg_covered_charges" class="form-control" /></div>
+
+</div>
+<div style="clear:both"></div>
+<div class="row row-space">
+	<label class="col-sm-2">Min Average Medicare Payments</label>
+	<div class="col-sm-2"><input type="text"  ng-model="vm.filter.min_avg_medicare_payments" class="form-control" /></div>
+	<label class="col-sm-2">Max Average Medicare Payments</label>
+	<div class="col-sm-2"><input type="text" ng-model="vm.filter.max_avg_medicare_payments" class="form-control" /></div>
+	<div class="col-sm-3"> <button ng-disabled="vm.busy" ng-click="vm.search()" style="width: 100%" class="btn btn-primary pull-right">Search</button>
+	</div>
+</div>
+<div style="clear:both"></div>
+<div class="row row-space">
+	<label class="col-sm-2">Select Datapoints</label>
+	<div class="col-sm-9">
+		<ui-select multiple limit="5" ng-model="vm.selectedDataPoints" theme="bootstrap" close-on-select="false" title="Select Datapoints...">
+			<ui-select-match placeholder="Select Datapoints...">{{$item.value}}</ui-select-match>
+			<ui-select-choices repeat="datapoint in vm.dataPoints | filter:$select.search">
+				{{datapoint.value}}
+			</ui-select-choices>
+		</ui-select>
+	</div>
+	<div style="clear:both"></div>
+</div>
+
+<div class="row row-space">
+	<div infinite-scroll='vm.getNextPage()' class="col-sm-12 responsivetable">
+		<table  infinite-scroll-disabled='vm.busy' infinite-scroll-distance='1' class="table table-striped"
+		 ng-repeat="table in vm.patientProviderData" wt-responsive-table>
+			<thead>
+				<th ng-if="column!='_id'" ng-repeat="column in table.cols">
+					{{column}}
+					</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="row in table.rows">
+
+					<td ng-if="column!='_id'" ng-repeat="column in table.cols">{{row[column]}}
+						<div style="clear:both"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="{{table.cols.length}}">
+						<div ng-show='vm.busy'>
+							<p style="text-align:center;">Loading data... <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+								/></p>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

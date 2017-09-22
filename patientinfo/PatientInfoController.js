@@ -10,10 +10,10 @@ parseParameters = function (req) {
     var provider_state = req.query.state;
     var max_discharges = parse(req.query.max_discharges);
     var min_discharges = parse(req.query.min_discharges);
-    var max_average_covered_charges = parse(req.query.max_average_covered_charges);
-    var min_average_covered_charges = parse(req.query.min_average_covered_charges);
-    var max_average_medicare_payments = parse(req.query.max_average_medicare_payments);
-    var min_average_medicare_payments = parse(req.query.min_average_medicare_payments);
+    var max_average_covered_charges = parse(req.query.max_avg_covered_charges);
+    var min_average_covered_charges = parse(req.query.min_avg_covered_charges);
+    var max_average_medicare_payments = parse(req.query.max_avg_medicare_payments);
+    var min_average_medicare_payments = parse(req.query.min_avg_medicare_payments);
     var queryObj = {};
     if (max_discharges && min_discharges) {
         queryObj['TotalDischarges'] = { $gte: min_discharges, $lte: max_discharges };
@@ -93,11 +93,17 @@ router.use(function(req, res, next) {
 
 // route to find all the patients for the supplied query(GET http://localhost:3000/providers)
 router.get('/', function (req, res) {
+    var pageOptions = {
+        page: req.headers["page"] || 0,
+        limit: req.headers["limit"] || 10
+    }
    var selectClause= req.headers['options'];
     var queryObj = parseParameters(req);
     // var q=JSON.parse(queryObj);
     // console.log(User);
-    PatientProvider.find(queryObj,selectClause, function (err, users) {
+    PatientProvider.find(queryObj,selectClause)
+    .skip(pageOptions.page*pageOptions.limit)
+    .limit(pageOptions.limit).exec( function (err, users) {
         if (err) return res.status(500).send("There was a problem finding the users.");
         res.status(200).send(users);
     });

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var mongoosePaginate = require('mongoose-paginate');
 var Schema = mongoose.Schema;
 var ProvidersSchema = new Schema({
   DRGDefinition: String,
@@ -14,6 +15,7 @@ var ProvidersSchema = new Schema({
   AverageMedicarePayments: Number,
   TotalDischarges: Number
 });
+ProvidersSchema.plugin(mongoosePaginate);
 mongoose.model('patientproviders', ProvidersSchema);
 
 module.exports = mongoose.model('patientproviders');

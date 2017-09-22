@@ -16,6 +16,11 @@
         display: block;
     }
 
+    .responsivetable {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
     /* Hide table headers (but not display: none;, for accessibility) */
     .responsive > thead > tr, 
     .responsive > thead > tr > th, 

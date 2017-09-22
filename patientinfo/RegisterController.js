@@ -10,13 +10,26 @@ router.post('/', function(req, resp){
      UserName:req.body.username,
      Password:req.body.password
     });
-
-    newUser.save(function(err) {
-        if (err)
-        resp.json({ success: false, message: 'Failed to Add User.' }); 
-        else 
-        resp.json({ success: true, message: 'User Added Successfully.' }); 
-    });
+    newUser.findOne({
+        UserName: req.body.username,
+       
+      },function(err,user)
+      {
+        if (err) throw err;
+        
+            if (!user) {
+                newUser.save(function(err) {
+                    if (err)
+                    resp.json({ success: false, message: 'Failed to Add User.' }); 
+                    else 
+                    resp.json({ success: true, message: 'User Added Successfully.' }); 
+                });
+            } else if (user)
+             {
+                resp.json({ success: false, message: 'User Already Exist.' }); 
+             }
+      });  
+   
 });
 
 module.exports = router;
