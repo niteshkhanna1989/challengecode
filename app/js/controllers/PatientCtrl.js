@@ -32,8 +32,13 @@ angular.module('PatientCtrl', ['PatientService','AuthenticationService']).contro
 		// reset login status
 		//vm.selectedDataPoints = vm.dataPoints;
 		var datapoints = '';
+		var initDataPoints=['DRGDefinition','ProviderId','ProviderName','TotalDischarges','AverageCoveredCharges','AverageTotalPayments']
 		angular.forEach(vm.dataPoints, function (datapoint) {
-			datapoints += datapoint.key + " ";
+			if(initDataPoints.indexOf(datapoint.key)>-1){
+				vm.selectedDataPoints.push(datapoint);
+				datapoints += datapoint.key + " ";
+			}
+			
 		});
 		datapoints = datapoints.substr(0, datapoints.length - 1);
 		PatientService.getPatientProviderData(datapoints, vm.filter).then(function (response) {

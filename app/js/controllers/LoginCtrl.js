@@ -29,7 +29,10 @@ angular.module('LoginCtrl', ['AuthenticationService']).controller('LoginControll
 		vm.loading = true;
 		AuthenticationService.Register(vm.username, vm.password, function (result) {
 			if (result.success) {
-			//	$location.path('/patientproviders');
+				vm.error = result.message;
+				//$location.path('/');
+				vm.isRegister=false;
+				vm.loading = false;
 			} else {
 				vm.error = result.message;
 				vm.loading = false;

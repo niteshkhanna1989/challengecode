@@ -15,7 +15,7 @@ angular.module('PatientService', []).factory('PatientService', ['$http', '$local
         }
 
         var token = $localStorage.currentUser.token;
-        return $http({ method: 'GET', url: 'http://localhost:3000/providers/?' + queryParams, headers: { 'options': datapoints, 'x-access-token': token,'page':page } })
+        return $http({ method: 'GET', url: 'https://patientproviders.herokuapp.com/?' + queryParams, headers: { 'options': datapoints, 'x-access-token': token,'page':page } })
     }
 
     function getQueryParams(filterObj) {

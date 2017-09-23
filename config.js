@@ -1,6 +1,6 @@
 module.exports = {
     
         'secret': 'codingChallenge',
-        'database': 'mongodb://127.0.0.1:27017/patientsInfo'
+        'database': 'mongodb://niteshkhanna:$happy1989@ds147274.mlab.com:47274/heroku_w208qcfj'
     
     };

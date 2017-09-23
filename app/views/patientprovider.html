@@ -46,7 +46,7 @@
 <div class="row row-space">
 	<label class="col-sm-2">Select Datapoints</label>
 	<div class="col-sm-9">
-		<ui-select multiple limit="5" ng-model="vm.selectedDataPoints" theme="bootstrap" close-on-select="false" title="Select Datapoints...">
+		<ui-select multiple  ng-model="vm.selectedDataPoints" theme="bootstrap" close-on-select="false" title="Select Datapoints...">
 			<ui-select-match placeholder="Select Datapoints...">{{$item.value}}</ui-select-match>
 			<ui-select-choices repeat="datapoint in vm.dataPoints | filter:$select.search">
 				{{datapoint.value}}
