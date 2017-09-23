@@ -57,7 +57,7 @@
 </div>
 
 <div class="row"><h4>Providers Data</h4></div>
-<div ng-show="windowWidth.width>800" id="list-wrapper" class="row well col-sm-12">
+<div ng-if="windowWidth.width>800" id="list-wrapper" class="row well col-sm-12">
 	<div infinite-scroll='vm.getNextPage()' infinite-scroll-distance='.1' infinite-scroll-parent="true" class="col-sm-12">
 		<table infinite-scroll-disabled='vm.busy' class="table table-striped" ng-repeat="table in vm.patientProviderData" wt-responsive-table>
 			<thead>
@@ -85,7 +85,7 @@
 		<div style="clear:both;"></div>
 	</div>
 </div>
-<div ng-show="windowWidth.width<800" class="row">
+<div ng-if="windowWidth.width<800" class="row">
 	<div infinite-scroll='vm.getNextPage()' class="col-sm-12">
 		<table infinite-scroll-distance='1' infinite-scroll-disabled='vm.busy' class="table table-striped" ng-repeat="table in vm.patientProviderData"
 		 wt-responsive-table>
