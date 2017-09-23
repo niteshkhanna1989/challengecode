@@ -1,5 +1,6 @@
 <!doctype html>
 <html ng-app="app" lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<base href="/">
@@ -10,23 +11,24 @@
 	<link rel="stylesheet" href="libs/angular-responsive-tables/release/angular-responsive-tables.min.css">
 	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="libs/angular-ui-select/dist/select.css">
-	
+
 	<!-- custom styles -->
 	<link rel="stylesheet" href="css/style.css">
 
-	
+
 
 	<!-- JS -->
-	
+
 	<script src="libs/angular/angular.js"></script>
+	<script src="libs/jquery/dist/jquery.js"></script>
 	<script src="libs/angular-responsive-tables/release/angular-responsive-tables.min.js"></script>
 	<script src="libs/angular-route/angular-route.min.js"></script>
 	<script src="libs/ngstorage/ngStorage.min.js"></script>
-	<script src="libs/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+	<script src="libs/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
 	<script src="libs/angular-ui-select/dist/select.js"></script>
 
 
-	
+
 	<!-- ANGULAR CUSTOM -->
 	<script src="js/controllers/LoginCtrl.js"></script>
 	<script src="js/controllers/NerdCtrl.js"></script>
@@ -34,15 +36,16 @@
 	<script src="js/controllers/PatientCtrl.js"></script>
 	<script src="js/services/PatientService.js"></script>
 	<script src="js/appRoutes.js"></script>
-	
-	
+
+
 	<script src="js/app.js"></script>
 </head>
+
 <body>
-<div class="container">
-	
-	<!-- HEADER -->
-	<!-- <nav class="navbar navbar-inverse">
+	<div class="container">
+
+		<!-- HEADER -->
+		<!-- <nav class="navbar navbar-inverse">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="/">Stencil: Node and Angular</a>
 		</div>
@@ -51,10 +54,38 @@
 			<li><a href="/geeks">Geeks</a></li>
 		</ul>
 	</nav> -->
-	
-	<!-- ANGULAR DYNAMIC CONTENT -->
-	<div ng-view></div>
 
-</div>
+		<!-- ANGULAR DYNAMIC CONTENT -->
+		<div ng-view></div>
+
+	</div>
+	<script>
+		$(document).ready(function () {
+
+
+			function DoubleScroll(element) {
+				var scrollbar = document.createElement('div');
+				scrollbar.appendChild(document.createElement('div'));
+				scrollbar.style.overflow = 'auto';
+				scrollbar.style.overflowY = 'hidden';
+				scrollbar.style.width = '150px';
+				scrollbar.firstChild.style.width = element.scrollWidth + 'px';
+				scrollbar.firstChild.style.paddingTop = '1px';
+				scrollbar.firstChild.appendChild(document.createTextNode('\xA0'));
+				scrollbar.onscroll = function () {
+					element.scrollLeft = scrollbar.scrollLeft;
+				};
+				element.onscroll = function () {
+					scrollbar.scrollLeft = element.scrollLeft;
+				};
+				element.parentNode.insertBefore(scrollbar, eleme);
+			};
+
+DoubleScroll(document.getElementById('doublescroll'));
+
+		});
+
+	</script>
 </body>
+
 </html>

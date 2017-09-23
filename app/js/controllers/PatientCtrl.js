@@ -1,4 +1,4 @@
-angular.module('PatientCtrl', ['PatientService']).controller('PatientController', function ($scope, PatientService, $timeout) {
+angular.module('PatientCtrl', ['PatientService']).controller('PatientController', function ($scope, PatientService, $timeout,$window) {
 
 	var vm = this;
 	vm.busy = false;
@@ -8,7 +8,7 @@ angular.module('PatientCtrl', ['PatientService']).controller('PatientController'
 	vm.filter.max_discharges = '';
 	vm.filter.min_discharges = '';
 	vm.filter.state = '';
-	vm.filter.max_avg_covered_charges = '';
+	vm.filter.max_avg_covered_charges =3000;
 	vm.filter.min_avg_covered_charges = '';
 	vm.filter.max_avg_medicare_payments = '';
 	vm.filter.min_avg_medicare_payments = '';
@@ -20,6 +20,8 @@ angular.module('PatientCtrl', ['PatientService']).controller('PatientController'
 	vm.patientProviderData = [];
 	vm.search=search;
 	vm.getNextPage = getNextPage;
+	$scope.windowWidth={};
+	$scope.windowWidth["width"]=$window.innerWidth;
 	// Initial Code Run 
 	initController();
 
