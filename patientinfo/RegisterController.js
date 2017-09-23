@@ -10,7 +10,7 @@ router.post('/', function(req, resp){
      UserName:req.body.username,
      Password:req.body.password
     });
-    newUser.findOne({
+    User.findOne({
         UserName: req.body.username,
        
       },function(err,user)

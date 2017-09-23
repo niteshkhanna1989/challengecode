@@ -31,7 +31,7 @@
 
 	<!-- ANGULAR CUSTOM -->
 	<script src="js/controllers/LoginCtrl.js"></script>
-	<script src="js/controllers/NerdCtrl.js"></script>
+	<script src="js/controllers/MainCtrl.js"></script>
 	<script src="js/services/AuthenticationService.js"></script>
 	<script src="js/controllers/PatientCtrl.js"></script>
 	<script src="js/services/PatientService.js"></script>
@@ -42,8 +42,8 @@
 </head>
 
 <body>
-	<div class="container">
-
+	<div class="container" >
+			
 		<!-- HEADER -->
 		<!-- <nav class="navbar navbar-inverse">
 		<div class="navbar-header">
@@ -59,33 +59,7 @@
 		<div ng-view></div>
 
 	</div>
-	<script>
-		$(document).ready(function () {
-
-
-			function DoubleScroll(element) {
-				var scrollbar = document.createElement('div');
-				scrollbar.appendChild(document.createElement('div'));
-				scrollbar.style.overflow = 'auto';
-				scrollbar.style.overflowY = 'hidden';
-				scrollbar.style.width = '150px';
-				scrollbar.firstChild.style.width = element.scrollWidth + 'px';
-				scrollbar.firstChild.style.paddingTop = '1px';
-				scrollbar.firstChild.appendChild(document.createTextNode('\xA0'));
-				scrollbar.onscroll = function () {
-					element.scrollLeft = scrollbar.scrollLeft;
-				};
-				element.onscroll = function () {
-					scrollbar.scrollLeft = element.scrollLeft;
-				};
-				element.parentNode.insertBefore(scrollbar, eleme);
-			};
-
-DoubleScroll(document.getElementById('doublescroll'));
-
-		});
-
-	</script>
+	
 </body>
 
 </html>

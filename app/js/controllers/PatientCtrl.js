@@ -1,4 +1,4 @@
-angular.module('PatientCtrl', ['PatientService']).controller('PatientController', function ($scope, PatientService, $timeout,$window) {
+angular.module('PatientCtrl', ['PatientService','AuthenticationService']).controller('PatientController', function ($scope,$location, PatientService,AuthenticationService, $timeout,$window,$localStorage) {
 
 	var vm = this;
 	vm.busy = false;
@@ -8,7 +8,7 @@ angular.module('PatientCtrl', ['PatientService']).controller('PatientController'
 	vm.filter.max_discharges = '';
 	vm.filter.min_discharges = '';
 	vm.filter.state = '';
-	vm.filter.max_avg_covered_charges =3000;
+	vm.filter.max_avg_covered_charges ='';
 	vm.filter.min_avg_covered_charges = '';
 	vm.filter.max_avg_medicare_payments = '';
 	vm.filter.min_avg_medicare_payments = '';
@@ -18,8 +18,10 @@ angular.module('PatientCtrl', ['PatientService']).controller('PatientController'
 	{ key: "AverageTotalPayments", value: "Average Total Payments" }, { key: "AverageMedicarePayments", value: "Average Medicare Payments" }]
 	vm.selectedDataPoints = [];
 	vm.patientProviderData = [];
+	vm.loggedinUser=$localStorage.currentUser.username;
 	vm.search=search;
 	vm.getNextPage = getNextPage;
+	vm.logout=logout;
 	$scope.windowWidth={};
 	$scope.windowWidth["width"]=$window.innerWidth;
 	// Initial Code Run 
@@ -108,6 +110,12 @@ function getDataPoints(){
 			}	
 		
 		});
+	}
+
+	function logout(){
+
+		AuthenticationService.Logout();
+		$location.path('/');
 	}
 
 });

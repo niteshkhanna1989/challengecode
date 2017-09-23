@@ -18,33 +18,36 @@ angular.module('AuthenticationService', []).factory('AuthenticationService', ['$
                     // $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
 
                     // execute callback with true to indicate successful login
-                    callback(true);
+                    callback(response);
                 } else {
                     // execute callback with false to indicate failed login
-                    callback(false);
+                    callback(response);
                 }
             });
     }
 
     function Logout() {
         // remove user from local storage and clear http auth header
-        delete $localStorage.currentUser;
+       delete $localStorage.currentUser;
+       
+     //  callback(true);
+       return true;
         // $http.defaults.headers.common.Authorization = '';
     }
 
     function Register(username, password, callback) {
-        $http.post('http://localhost:3000/register', { username: username, password: password })
+        $http({method:'POST',url:'http://localhost:3000/register', data: 'username='+ username+ '&password='+ password , headers:{'Content-Type': 'application/x-www-form-urlencoded'}})
             .success(function (response) {
                 // login successful if there's a token in the response
-                if (response.true) {
+                if (response.success) {
                    // // add jwt token to auth header for all requests made by the $http service
                     // $http.defaults.headers.common.Authorization = 'Bearer ' + response.token;
 
                     // execute callback with true to indicate successful login
-                    callback(true);
+                    callback(response);
                 } else {
                     // execute callback with false to indicate failed login
-                    callback(false);
+                    callback(response);
                 }
             });
     }
