@@ -84,7 +84,7 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 				});
 				$scope.data = response.data;
 				vm.gridOptions = {
-					infiniteScrollRowsFromEnd: 30,
+					infiniteScrollRowsFromEnd: 10,
 					infiniteScrollUp: false,
 					infiniteScrollDown: true,
 					enableSorting: false,

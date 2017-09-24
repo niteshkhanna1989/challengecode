@@ -13,9 +13,9 @@ app.use('/authenticate',UserController);
 app.use('/register',RegisterController);
 // used wildecard route to serve my angular application. 
 app.use(express.static(__dirname+'/app'));
-app.get('/patientproviders', function(req, res){
+app.get('/', function(req, res){
 //     var parsedUrl = url.parse(req.url);
 // var filename = url.resolve('/', parsedUrl.pathname);
-    res.render('index.html');
+res.sendFile("index.html", {"root": __dirname+'/app'});
 });
 module.exports = app;
