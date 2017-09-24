@@ -11,7 +11,7 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 	vm.filter.min_avg_covered_charges = '';
 	vm.filter.max_avg_medicare_payments = '';
 	vm.filter.min_avg_medicare_payments = '';
-	vm.dataPoints = [{ name: "DRGDefinition", value: "DRG Definition", width: '30%', minWidth: 120  }, { name: "ProviderId", value: "Provider ID" , width: '30%',  minWidth: 70}, { name: "ProviderName", value: "Provider Name", width: '30%',  minWidth: 120 }, { name: "ProviderStreetAddress", value: "Provider Street Address" , width: '30%',  minWidth: 1200},
+	vm.dataPoints = [{ name: "DRGDefinition", value: "DRG Definition", width: '30%', minWidth: 120  }, { name: "ProviderId", value: "Provider ID" , width: '30%',  minWidth: 70}, { name: "ProviderName", value: "Provider Name", width: '30%',  minWidth: 120 }, { name: "ProviderStreetAddress", value: "Provider Street Address" , width: '30%',  minWidth: 120},
 	{ name: "ProviderCity", value: "Provider City", width: '30%', minWidth: 70 }, { name: "ProviderState", value: "Provider State", width: '30%',  minWidth: 70 }, { name: "ProviderZipCode", value: "Provider Zip Code", width: '30%',  minWidth: 70 }, { name: "HospitalReferralRegionDescription", value: "Hospital Referral Region Description", width: '30%',  minWidth: 1200 }, { name: "TotalDischarges", value: "Total Discharges", width: '30%',  minWidth: 70 },
 	{ name: "AverageCoveredCharges", value: "Average Covered Charges", width: '30%',  minWidth: 70 },
 	{ name: "AverageTotalPayments", value: "Average Total Payments", width: '30%', minWidth: 70 }, { name: "AverageMedicarePayments", value: "Average Medicare Payments", width: '30%',  minWidth: 70 }]
