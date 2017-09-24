@@ -2,13 +2,16 @@
         Username: test<br />
         Password: test
 	</div> -->
-<div class="row">
+<div style="margin-top:-20px" class="row">
 	<div class="col-sm-10">
-	
+			
 	</div>
 	<div  class="col-sm-2">
-			
-		<div style="text-align: right"><div style="font-weight:bold" ng-if="vm.loggedinUser"> Hi {{vm.loggedinUser}},</div><a ng-click="vm.logout()">LogOut!</a></div>
+			<div style="float:right;">
+					<span ng-if="vm.loggedinUser" style="display:inline;font-weight:bold">Hi {{vm.loggedinUser}},</span>
+					<span style="display:inline; "><a ng-click="vm.logout()">LogOut!</a></span>
+					</div>
+		<!-- <div ><div style="font-weight:bold" ng-if="vm.loggedinUser"> Hi {{vm.loggedinUser}},</div><a ng-click="vm.logout()">LogOut!</a></div> -->
 	</div>
 </div>
 <!-- <div class="row">
@@ -16,7 +19,7 @@
 </div> -->
 
 <!-- <form name="form" ng-submit="form.$valid && vm.login()" novalidate> -->
-<div class="row">
+<div class="row row-space">
 	<label class="col-sm-2">Minimum Discharges</label>
 	<div class="col-sm-2"><input type="text" ng-model="vm.filter.min_discharges" class="form-control" /></div>
 	<label class="col-sm-2">Maximum Discharges</label>
@@ -57,13 +60,15 @@
 </div>
 
 <div class="row"><h4>Providers Data</h4></div>
-<div ng-if="windowWidth.width>800" id="list-wrapper" class="row well col-sm-12">
-	<div infinite-scroll='vm.getNextPage()' infinite-scroll-distance='.1' infinite-scroll-parent="true" class="col-sm-12">
+<!-- <div ng-if="windowWidth.width>800" id="list-wrapper" class="row well col-sm-12">
+	<div  infinite-scroll='vm.getNextPage()' infinite-scroll-distance='.1' infinite-scroll-parent="true" class="col-sm-12">
 		<table infinite-scroll-disabled='vm.busy' class="table table-striped" ng-repeat="table in vm.patientProviderData" wt-responsive-table>
 			<thead>
+				<tr>
 				<th ng-if="column!='_id'" ng-repeat="column in table.cols">
 					{{column}}
-					</tr>
+					</th>
+				</tr>
 			</thead>
 			<tbody>
 				<tr ng-repeat="row in table.rows">
@@ -92,7 +97,7 @@
 			<thead>
 				<th ng-if="column!='_id'" ng-repeat="column in table.cols">
 					{{column}}
-					</tr>
+					</th>
 			</thead>
 			<tbody>
 				<tr ng-repeat="row in table.rows">
@@ -113,4 +118,5 @@
 		</table>
 		<div style="clear:both;"></div>
 	</div>
-</div>
+</div> -->
+

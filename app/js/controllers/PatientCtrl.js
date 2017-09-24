@@ -22,6 +22,7 @@ angular.module('PatientCtrl', ['PatientService','AuthenticationService']).contro
 	vm.search=search;
 	vm.getNextPage = getNextPage;
 	vm.logout=logout;
+	vm.scroll=scroll;
 	$scope.windowWidth={};
 	$scope.windowWidth["width"]=$window.innerWidth;
 	// Initial Code Run 
@@ -121,6 +122,11 @@ function getDataPoints(){
 
 		AuthenticationService.Logout();
 		$location.path('/');
+	}
+
+	function scroll(){
+
+		alert("");
 	}
 
 });

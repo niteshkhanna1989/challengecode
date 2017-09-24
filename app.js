@@ -13,7 +13,7 @@ app.use('/authenticate',UserController);
 app.use('/register',RegisterController);
 // used wildecard route to serve my angular application. 
 app.use(express.static(__dirname+'/app'));
-app.get('*', function(req, res){
+app.get('/patientproviders', function(req, res){
 //     var parsedUrl = url.parse(req.url);
 // var filename = url.resolve('/', parsedUrl.pathname);
     res.render('index.html');

@@ -1,4 +1,4 @@
-var app=angular.module('app', ['infinite-scroll','wt.responsive','ui.select','ngRoute', 'ngStorage','appRoutes', 'LoginCtrl', 'MainCtrl', 'AuthenticationService', 'PatientCtrl', 'PatientService']);
+var app=angular.module('app', ['infinite-scroll','wt.responsive','ui.select','ngRoute', 'ngStorage','appRoutes', 'LoginCtrl', 'AuthenticationService', 'PatientCtrl', 'PatientService']);
 app.run(run);
 
 function run($rootScope, $http, $location, $localStorage) {

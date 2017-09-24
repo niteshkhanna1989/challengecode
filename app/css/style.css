@@ -9,13 +9,17 @@ body { padding-top:30px; }
     }
 
     #list-wrapper{
-      max-height: 300px;
+      max-height: 310px;
       overflow-y: scroll;
       
       margin-top: 20px;
       /* border: solid 1px grey; */
   }
-    
+  
   }
+  a {
+      cursor: pointer;
+  }
+  
 
  

@@ -1,8 +1,4 @@
-<div class="col-md-6 col-md-offset-3">
-    <!-- <div class="alert alert-info">
-        Username: test<br />
-        Password: test
-    </div> -->
+ <!-- <div class="col-md-6 col-md-offset-3">
     <div ng-if="vm.isRegister==true">
             <div class="row">
                     <h2>Register</h2>
@@ -58,4 +54,82 @@
         <div ng-if="vm.error" class="alert alert-danger">{{vm.error}}</div>
     </form>
 </div>
-</div>
+</div>  -->
+
+
+
+<div ng-if="vm.isRegister==false" class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-heading">
+				<h2 class="text-center">Login</h2>
+			</div>
+			<hr />
+			<div class="modal-body">
+				<form action="" role="form">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon">
+							<span class="glyphicon glyphicon-user"></span>
+							</span>
+							<input type="text" class="form-control" ng-model="vm.username" placeholder="User Name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon">
+							<span class="glyphicon glyphicon-lock"></span>
+							</span>
+							<input type="password" ng-model="vm.password" class="form-control" placeholder="Password" />
+
+						</div>
+
+					</div>
+
+					<div class="form-group text-center">
+						<input type="button" ng-click="vm.login()" value="Login" class="btn btn-success btn-lg"></input>
+                        <img ng-if="vm.loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                        <a href="#" ng-click="vm.isRegister=true;vm.error=''" class="btn btn-link">Register</a>
+                    </div>
+                    <div ng-if="vm.error" class="alert alert-danger">{{vm.error}}</div>
+
+				</form>
+			</div>
+		</div>
+    </div>
+    <div ng-if="vm.isRegister==true" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-heading">
+                    <h2 class="text-center">Register</h2>
+                </div>
+                <hr />
+                <div class="modal-body">
+                    <form action="" role="form">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"></span>
+                                </span>
+                                <input type="text" class="form-control" ng-model="vm.username" placeholder="User Name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-lock"></span>
+                                </span>
+                                <input type="password" ng-model="vm.password" class="form-control" placeholder="Password" />
+    
+                            </div>
+    
+                        </div>
+    
+                        <div class="form-group text-center">
+                            <input type="button" ng-click="vm.register()" value="Register" class="btn btn-success btn-lg"></button>
+                            <img ng-if="vm.loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                            <a href="#" ng-click="vm.isRegister=false;vm.error=''" class="btn btn-link">Already a member?Sign In</a>
+                        </div>
+                        <div ng-if="vm.error" class="alert alert-danger">{{vm.error}}</div>
+                    </form>
+                </div>
+            </div>
+        </div>
