@@ -95,7 +95,7 @@ router.use(function(req, res, next) {
 router.get('/', function (req, res) {
     var pageOptions = {
         page: req.headers["page"] || 0,
-        limit: req.headers["limit"] || 10
+        limit: req.headers["limit"] || 40
     }
    var selectClause= req.headers['options'];
     var queryObj = parseParameters(req);

@@ -19,9 +19,9 @@ module.exports = function (config) {
 
       './app/libs/angular-mocks/angular-mocks.js',                 // loads our modules for tests
       './app/libs/ngInfiniteScroll/build/ng-infinite-scroll.js',
+      './app/libs/angular-ui-grid/ui-grid.min.js',
       './app/libs/angular-ui-select/dist/select.js',
-      './app/libs/angular-responsive-tables/release/angular-responsive-tables.min.js',
-
+      
       './app/libs/angular-route/angular-route.min.js', // ui-router
       './app/libs/ngstorage/ngStorage.min.js',
       './app/js/appRoutes.js',
@@ -29,10 +29,12 @@ module.exports = function (config) {
       './app/js/services/AuthenticationService.js',
       './app/js/controllers/PatientCtrl.js',
       './app/js/services/PatientService.js',
-
+      
+      
       './app/js/app.js',                                                  // our angular app
-      './app/services/users/users.spec.js',
-      './app/js/services/AuthenticationService.spec.js'
+      
+      './app/js/services/AuthenticationService.spec.js',
+      './app/js/services/PatientService.spec.js'
     ],
 
 

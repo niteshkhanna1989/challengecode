@@ -2,7 +2,7 @@
         Username: test<br />
         Password: test
 	</div> -->
-<div style="margin-top:-20px" class="row">
+ <div style="margin-top:-20px" class="row">
 	<div class="col-sm-10">
 			
 	</div>
@@ -13,7 +13,7 @@
 					</div>
 		<!-- <div ><div style="font-weight:bold" ng-if="vm.loggedinUser"> Hi {{vm.loggedinUser}},</div><a ng-click="vm.logout()">LogOut!</a></div> -->
 	</div>
-</div>
+</div> 
 <!-- <div class="row">
 	<h4>Search Filters</h4>
 </div> -->
@@ -50,9 +50,9 @@
 	<label class="col-sm-2">Select Datapoints</label>
 	<div class="col-sm-9">
 		<ui-select multiple  ng-model="vm.selectedDataPoints" theme="bootstrap" close-on-select="false" title="Select Datapoints...">
-			<ui-select-match placeholder="Select Datapoints...">{{$item.value}}</ui-select-match>
+			<ui-select-match placeholder="Select Datapoints...">{{$item.name}}</ui-select-match>
 			<ui-select-choices repeat="datapoint in vm.dataPoints | filter:$select.search">
-				{{datapoint.value}}
+				{{datapoint.name}}
 			</ui-select-choices>
 		</ui-select>
 	</div>
@@ -60,8 +60,8 @@
 </div>
 
 <div class="row"><h4>Providers Data</h4></div>
-<!-- <div ng-if="windowWidth.width>800" id="list-wrapper" class="row well col-sm-12">
-	<div  infinite-scroll='vm.getNextPage()' infinite-scroll-distance='.1' infinite-scroll-parent="true" class="col-sm-12">
+<!-- <div ng-if="windowWidth.width>800" id="list-wrapper" class="row col-sm-12">
+	<div  infinite-scroll='vm.getNextPage()' infinite-scroll-distance='.1' infinite-scroll-parent="true" class="col-sm-12 container-scroll">
 		<table infinite-scroll-disabled='vm.busy' class="table table-striped" ng-repeat="table in vm.patientProviderData" wt-responsive-table>
 			<thead>
 				<tr>
@@ -119,4 +119,8 @@
 		<div style="clear:both;"></div>
 	</div>
 </div> -->
+<div class="row">
+		<div id="grid1" ui-grid="vm.gridOptions" ui-grid-infinite-scroll ui-grid-resize-columns class="grid" ng-if="vm.gridOptions"></div>
+		<span> &nbsp; &nbsp; Pages: {{ vm.page }} &nbsp; &nbsp;&nbsp; Data Count {{ vm.recordsCount}} </span>
+	</div>
 

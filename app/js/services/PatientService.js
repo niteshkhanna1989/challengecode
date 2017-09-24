@@ -4,7 +4,7 @@ angular.module('PatientService', []).factory('PatientService', ['$http', '$local
     };
     return service;
     var queryParameters = '';
-    function getPatientProviderData(datapoints, filterObj,page, fromScroll) {
+    function getPatientProviderData(datapoints, filterObj, page, fromScroll) {
         var token = '';
         var queryParams = '';
         if (!fromScroll) {
@@ -13,9 +13,12 @@ angular.module('PatientService', []).factory('PatientService', ['$http', '$local
         else {
             queryParams = queryParameters;
         }
+        var token = '';
+        if ($localStorage.currentUser) {
+            token = $localStorage.currentUser.token;
+        }
 
-        var token = $localStorage.currentUser.token;
-        return $http({ method: 'GET', url: '/providers?' + queryParams, headers: { 'options': datapoints, 'x-access-token': token,'page':page } })
+        return $http({ method: 'GET', url: '/providers?' + queryParams, headers: { 'options': datapoints, 'x-access-token': token, 'page': page } })
     }
 
     function getQueryParams(filterObj) {
