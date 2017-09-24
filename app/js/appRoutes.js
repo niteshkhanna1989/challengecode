@@ -1,4 +1,4 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
 	$routeProvider
 
@@ -9,16 +9,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controllerAs: 'vm'
 		})
 
-		.when('/nerds', {
-			templateUrl: 'views/nerd.html',
-			controller: 'MainController',
-			controllerAs: 'vm'
-		})
-
 		.when('/patientproviders', {
 			templateUrl: 'views/patientprovider.html',
 			controller: 'PatientController',
-			controllerAs: 'vm'	
+			controllerAs: 'vm'
 		});
 
 	$locationProvider.html5Mode(true);

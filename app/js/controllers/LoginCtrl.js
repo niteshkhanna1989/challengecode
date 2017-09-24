@@ -13,6 +13,7 @@ angular.module('LoginCtrl', ['AuthenticationService']).controller('LoginControll
 		// reset login status
 		AuthenticationService.Logout();
 	};
+	//Login Function
 	function login() {
 		vm.loading = true;
 		AuthenticationService.Login(vm.username, vm.password, function (result) {
@@ -24,7 +25,7 @@ angular.module('LoginCtrl', ['AuthenticationService']).controller('LoginControll
 			}
 		});
 	};
-
+//Register Function
 	function register() {
 		vm.loading = true;
 		AuthenticationService.Register(vm.username, vm.password, function (result) {
