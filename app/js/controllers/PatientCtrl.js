@@ -72,9 +72,15 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 				var colDefs = Object.keys(response.data[0]);
 				var cols = [];
 				$scope.cols = [];
+				var idIndex = colDefs.indexOf('_id');
+				if (idIndex > -1) {
+					colDefs.splice(idIndex, 1);
+				}
 				angular.forEach(vm.dataPoints, function (datapoint) {
-					if (colDefs.indexOf(datapoint.name) > -1)
+					if (colDefs.indexOf(datapoint.name) > -1) {
+						setDynamicWidth(colDefs,datapoint);
 						$scope.cols.push(datapoint);
+					}
 				});
 				$scope.data = response.data;
 				vm.gridOptions = {
@@ -100,7 +106,11 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 
 
 	}
-
+	$scope.$watch('vm.selectedDataPoints', function () {
+		vm.page = 1;
+	//	vm.gridOptions.data = [];
+		search();
+	});
 	//Function to get data on infinite scroll
 	function getNextPage() {
 
@@ -112,10 +122,20 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 			if (response.status == 200 && response.data.length > 0) {
 				$scope.gridApi.infiniteScroll.saveScrollPercentage();
 				var colDefs = Object.keys(response.data[0]);
+				var idIndex = colDefs.indexOf('_id');
+				if (idIndex > -1) {
+					colDefs.splice(idIndex, 1);
+				}
 				$scope.cols = [];
 				angular.forEach(vm.dataPoints, function (datapoint) {
-					if (colDefs.indexOf(datapoint.name) > -1)
+					if (colDefs.indexOf(datapoint.name) > -1) {
+
+						setDynamicWidth(colDefs,datapoint);
 						$scope.cols.push(datapoint);
+						vm.gridOptions.columnDefs = $scope.cols;
+
+
+					}
 				});
 				vm.busy = false;
 				vm.page += 1;
@@ -132,7 +152,23 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 
 		});
 	}
+	function setDynamicWidth(colDefs,datapoint) {
+		if (colDefs.length == 3) {
 
+			datapoint.width = "34%";
+		}
+		else if (colDefs.length == 2) {
+
+			datapoint.width = "50%";
+		}
+		else if (colDefs.length == 1) {
+
+			datapoint.width = "100%";
+		}
+		else {
+			datapoint.width = "30%";
+		}
+	}
 	//Logout of Application
 	function logout() {
 
