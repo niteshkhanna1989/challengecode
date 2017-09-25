@@ -78,6 +78,7 @@ run karma start to run the test cases.
 
 Fixed bugs related to UI grid
 Fixed Search Bugs
+Fixed Cannot GET route bug while trying to access subroutes.
 Added Total count Feature to check total count of records found for matching search criteria.
 
 
