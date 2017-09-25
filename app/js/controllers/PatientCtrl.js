@@ -25,10 +25,11 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 	$scope.data = [];
 	$scope.cols = [];
 	vm.recordsCount = 0;
-	vm.firstTime=true;
-
+	vm.totalCount=0;
+	vm.firstTime = true;
+	vm.loading = false;
 	// Initial Code Run 
-	search(vm.firstTime);
+	search(vm.firstTime, false);
 
 	// Function to get selected datapoints
 	function getDataPoints() {
@@ -48,12 +49,17 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 		return datapoints;
 	}
 	//Search function to get initial data and on search click
-	function search(firstTime) {
-		
+	function search(firstTime, fromClick) {
+		vm.recordsCount=0;
+		vm.totalCount=0;
 		vm.page = 0;
 		vm.busy = true;
+		if (fromClick) {
+			vm.loading = true;
+		}
 		vm.patientProviderData = [];
 		var datapoints = '';
+		//vm.filter.state=vm.filter.state.toUpperCase();
 		if (firstTime) {
 
 			var initDataPoints = ['DRGDefinition', 'ProviderId', 'ProviderName', 'TotalDischarges', 'AverageCoveredCharges', 'AverageTotalPayments']
@@ -69,87 +75,87 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 		else {
 			datapoints = getDataPoints();
 		}
+
 		PatientService.getPatientProviderData(datapoints, vm.filter).then(function (response) {
-			if (response.status == 200 ) {
-				var colDefs=[];
-				if(response.data.length>0)
-				{
-					 colDefs= Object.keys(response.data[0]);
+			if (response.status == 200) {
+				var colDefs = [];
+				if (response.data.data.length > 0) {
+					colDefs = Object.keys(response.data.data[0]);
 				}
-				else{
-					if(vm.selectedDataPoints.length>0)
-					{
-						angular.forEach(vm.selectedDataPoints,function(datapoint){
-								colDefs.push(datapoint.name);
+				else {
+					if (vm.selectedDataPoints.length > 0) {
+						angular.forEach(vm.selectedDataPoints, function (datapoint) {
+							colDefs.push(datapoint.name);
 						});
 					}
-				}	
-					var cols = [];
-					$scope.cols = [];
-					var idIndex = colDefs.indexOf('_id');
-					if (idIndex > -1) {
-						colDefs.splice(idIndex, 1);
+				}
+				var cols = [];
+				$scope.cols = [];
+				var idIndex = colDefs.indexOf('_id');
+				if (idIndex > -1) {
+					colDefs.splice(idIndex, 1);
+				}
+				angular.forEach(vm.dataPoints, function (datapoint) {
+					if (colDefs.indexOf(datapoint.name) > -1) {
+						setDynamicWidth(colDefs, datapoint);
+						$scope.cols.push(datapoint);
 					}
-					angular.forEach(vm.dataPoints, function (datapoint) {
-						if (colDefs.indexOf(datapoint.name) > -1) {
-							setDynamicWidth(colDefs,datapoint);
-							$scope.cols.push(datapoint);
-						}
-					});
-					$scope.data = response.data;
-					
-					vm.gridOptions = {
-						infiniteScrollRowsFromEnd: 10,
-						infiniteScrollUp: false,
-						infiniteScrollDown: true,
-						enableSorting: false,
-						columnDefs: $scope.cols,
-						data: $scope.data,
-						onRegisterApi: function (gridApi) {
-							gridApi.infiniteScroll.on.needLoadMoreData($scope, vm.getNextPage);
-							//	gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, $scope.getDataUp);
-							$scope.gridApi = gridApi;
-						}
-					};
-					if(response.data<=40){
-						$scope.gridApi.infiniteScroll.dataLoaded(false, false);
-						
+				});
+				$scope.data = response.data.data;
+
+				vm.gridOptions = {
+					infiniteScrollRowsFromEnd: 10,
+					infiniteScrollUp: false,
+					infiniteScrollDown: true,
+					enableSorting: false,
+					columnDefs: $scope.cols,
+					data: $scope.data,
+					onRegisterApi: function (gridApi) {
+						gridApi.infiniteScroll.on.needLoadMoreData($scope, vm.getNextPage);
+						//	gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, $scope.getDataUp);
+						$scope.gridApi = gridApi;
 					}
-					else{
-							vm.page += 1;
-					}
-					if(!firstTime){
-						$scope.gridApi.infiniteScroll.resetScroll();
-						$scope.gridApi.infiniteScroll.dataLoaded();
-					}
-				
-					vm.recordsCount = vm.gridOptions.data.length;
-					vm.busy = false;
-					vm.firstTime=false;
-				
-				
-				
-				
-		
+				};
+				if (response.data.data <= 40) {
+					$scope.gridApi.infiniteScroll.dataLoaded(false, false);
+
+				}
+				else {
+					vm.page += 1;
+				}
+				if (!firstTime) {
+					$scope.gridApi.infiniteScroll.resetScroll();
+					$scope.gridApi.infiniteScroll.dataLoaded();
+				}
+
+				vm.recordsCount = vm.gridOptions.data.length;
+				vm.totalCount=response.data.totalCount;
+				vm.busy = false;
+				vm.loading = false;
+				vm.firstTime = false;
+
+
+
+
+
 				//vm.patientProviderData.push({ rows: response.data, cols:  });
 			}
-			
-		
-			
+
+
+
 
 		});
 
 
 	}
 	$scope.$watch('vm.selectedDataPoints', function () {
-		
-	//	vm.gridOptions.data = [];
-	if(!vm.firstTime)
-	{
-		vm.page = 0;
-		search(vm.firstTime);
-	}
-	
+
+		//	vm.gridOptions.data = [];
+		if (!vm.firstTime) {
+			vm.page = 0;
+			search(vm.firstTime,false);
+		}
+
 	});
 	//Function to get data on infinite scroll
 	function getNextPage() {
@@ -159,9 +165,9 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 		//vm.page = 1;
 		var datapoints = getDataPoints();
 		PatientService.getPatientProviderData(datapoints, vm.filter, vm.page, true).then(function (response) {
-			if (response.status == 200 && response.data.length > 0) {
+			if (response.status == 200 && response.data.data.length > 0) {
 				$scope.gridApi.infiniteScroll.saveScrollPercentage();
-				var colDefs = Object.keys(response.data[0]);
+				var colDefs = Object.keys(response.data.data[0]);
 				var idIndex = colDefs.indexOf('_id');
 				if (idIndex > -1) {
 					colDefs.splice(idIndex, 1);
@@ -170,7 +176,7 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 				angular.forEach(vm.dataPoints, function (datapoint) {
 					if (colDefs.indexOf(datapoint.name) > -1) {
 
-						setDynamicWidth(colDefs,datapoint);
+						setDynamicWidth(colDefs, datapoint);
 						$scope.cols.push(datapoint);
 						vm.gridOptions.columnDefs = $scope.cols;
 
@@ -179,10 +185,11 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 				});
 				vm.busy = false;
 				vm.page += 1;
-				vm.gridOptions.data = vm.gridOptions.data.concat(response.data);
+				vm.gridOptions.data = vm.gridOptions.data.concat(response.data.data);
 				$scope.gridApi.infiniteScroll.dataLoaded();
 
 				vm.recordsCount = vm.gridOptions.data.length;
+				vm.totalCount=response.data.totalCount;
 				//	vm.patientProviderData.push({rows:response.data,cols:Object.keys(response.data[0])});
 
 			}
@@ -192,7 +199,7 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 
 		});
 	}
-	function setDynamicWidth(colDefs,datapoint) {
+	function setDynamicWidth(colDefs, datapoint) {
 		if (colDefs.length == 3) {
 
 			datapoint.width = "34%";

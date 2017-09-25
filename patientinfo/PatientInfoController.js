@@ -8,52 +8,60 @@ var User=require('./User');
 
 parseParameters = function (req) {
     var provider_state = req.query.state;
-    var max_discharges = parse(req.query.max_discharges);
-    var min_discharges = parse(req.query.min_discharges);
-    var max_average_covered_charges = parse(req.query.max_avg_covered_charges);
-    var min_average_covered_charges = parse(req.query.min_avg_covered_charges);
-    var max_average_medicare_payments = parse(req.query.max_avg_medicare_payments);
-    var min_average_medicare_payments = parse(req.query.min_avg_medicare_payments);
+    var max_discharges = req.query.max_discharges;
+    var min_discharges = req.query.min_discharges;
+    var max_average_covered_charges = req.query.max_avg_covered_charges;
+    var min_average_covered_charges = req.query.min_avg_covered_charges;
+    var max_average_medicare_payments = req.query.max_avg_medicare_payments;
+    var min_average_medicare_payments = req.query.min_avg_medicare_payments;
     var queryObj = {};
     if (max_discharges && min_discharges) {
-        queryObj['TotalDischarges'] = { $gte: min_discharges, $lte: max_discharges };
+        queryObj['TotalDischarges'] = { $gte:  parse(min_discharges), $lte: parse(max_discharges) };
         // queryarray.push(TotalDischarges);
     }
     else if (max_discharges) {
-        queryObj['TotalDischarges'] = { $lte: max_discharges };
+        queryObj['TotalDischarges'] = { $lte: parse(max_discharges) };
         // queryarray.push(TotalDischarges);
     }
     else if (min_discharges) {
-        queryObj['TotalDischarges'] = { $gte: min_discharges };
+        queryObj['TotalDischarges'] = { $gte:  parse(min_discharges) };
         //  queryarray.push(TotalDischarges);
     }
     if (provider_state) {
-        queryObj['ProviderState'] = provider_state;
+        queryObj['ProviderState'] = provider_state.toUpperCase();
     }
     if (max_average_covered_charges && min_average_covered_charges) {
-        queryObj['AverageCoveredCharges'] = { $gte: min_average_covered_charges, $lte: max_average_covered_charges };
+        queryObj['AverageCoveredCharges'] = { $gte:  parse(min_average_covered_charges), $lte:  parse(max_average_covered_charges) };
     }
     else if (max_average_covered_charges) {
-        queryObj['AverageCoveredCharges'] = { $lte: max_average_covered_charges };
+        queryObj['AverageCoveredCharges'] = { $lte:  parse(max_average_covered_charges) };
     }
     else if (min_average_covered_charges) {
-        queryObj['AverageCoveredCharges'] = { $gte: min_average_covered_charges };
+        queryObj['AverageCoveredCharges'] = { $gte:  parse(min_average_covered_charges) };
     }
     if (max_average_medicare_payments && min_average_medicare_payments) {
-        queryObj['AverageMedicarePayments'] = { $gte: min_average_medicare_payments, $lte: max_average_medicare_payments };
+        queryObj['AverageMedicarePayments'] = { $gte:  parse(min_average_medicare_payments), $lte:  parse(max_average_medicare_payments) };
     }
     else if (max_average_medicare_payments) {
-        queryObj['AverageMedicarePayments'] = { $lte: max_average_medicare_payments };
+        queryObj['AverageMedicarePayments'] = { $lte:  parse(max_average_medicare_payments) };
     }
     else if (min_average_medicare_payments) {
-        queryObj['AverageMedicarePayments'] = { $gte: min_average_medicare_payments };
+        queryObj['AverageMedicarePayments'] = { $gte:  parse(min_average_medicare_payments) };
     }
 
     return queryObj;
 }
 parse = function (val) {
     if (val)
+    {
+        if(val=="0")
+        {
+            return 0;
+        }
+        else
         return Number(val) || undefined;
+    }
+       
 
     else
         return undefined;
@@ -104,8 +112,11 @@ router.get('/', function (req, res) {
     PatientProvider.find(queryObj,selectClause)
     .skip(pageOptions.page*pageOptions.limit)
     .limit(pageOptions.limit).exec( function (err, users) {
-        if (err) return res.status(500).send("There was a problem finding the users.");
-        res.status(200).send(users);
+        PatientProvider.count(queryObj,function(error,totalCount){
+            if (err) return res.status(500).send("There was a problem finding the users.");
+            res.status(200).send({data:users,totalCount:totalCount});
+        });
+       
     });
 });
 
