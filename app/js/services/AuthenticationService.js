@@ -8,7 +8,7 @@ angular.module('AuthenticationService', []).factory('AuthenticationService', ['$
 
     //Login function to get authenticated with backend service
     function Login(username, password, callback) {
-        $http({method:'POST',url:'/authenticate', data: 'username='+ username+ '&password='+ btoa(password) , headers:{'Content-Type': 'application/x-www-form-urlencoded'}})
+        $http({method:'POST',url:'/authenticate', data: 'username='+ username+ '&password='+ password , headers:{'Content-Type': 'application/x-www-form-urlencoded'}})
             .success(function (response) {
                 // login successful if there's a token in the response
                 if (response.token) {
@@ -36,7 +36,7 @@ angular.module('AuthenticationService', []).factory('AuthenticationService', ['$
     }
 
     function Register(username, password, callback) {
-        $http({method:'POST',url:'/register', data: 'username='+ username+ '&password='+ btoa(password) , headers:{'Content-Type': 'application/x-www-form-urlencoded'}})
+        $http({method:'POST',url:'/register', data: 'username='+ username+ '&password='+ password , headers:{'Content-Type': 'application/x-www-form-urlencoded'}})
             .success(function (response) {
                 // login successful if there's a token in the response
                 if (response.success) {

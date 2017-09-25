@@ -4,7 +4,7 @@ describe('Authentication Service', function () {
   var originalTimeout;
   var LoginObj = {};
   LoginObj.username = "Admin";
-  LoginObj.password = "Admin";
+  LoginObj.password = "=QWRtaW4=";
   // Before each test load our api.users module
   beforeEach(angular.mock.module('app'));
 
@@ -31,7 +31,7 @@ describe('Authentication Service', function () {
   it('Expect Login To return Success', function () {
     var url = "http://localhost:3000";
     var username = 'Admin';
-    var password = 'Admin';
+    var password = '=QWRtaW4=';
     var responseObj = {
       success: true,
       token: '',
@@ -51,7 +51,7 @@ describe('Authentication Service', function () {
   it('Expect Login To return Error', function () {
     var url = "http://localhost:3000";
     var username = 'Admin';
-    var password = 'Admin';
+    var password = '=QWRtaW4=';
     var responseObj = {
       success: false,
       token: '',
@@ -73,7 +73,7 @@ describe('Authentication Service', function () {
   it('Expect Login To throw error message Authentication failed. Wrong password.', function () {
     var url = "http://localhost:3000";
     var username = 'Admin';
-    var password = 'Admin';
+    var password = '=QWRtaW4=';
     var responseObj = {
       success: false,
       token: '',
@@ -94,7 +94,7 @@ describe('Authentication Service', function () {
   it('Expect Login To return Token on successful login', function () {
     var url = "http://localhost:3000";
     var username = 'Admin';
-    var password = 'Admin';
+    var password = '=QWRtaW4=';
     var responseObj = {
       success: true,
       token: 'ftghhj',
@@ -120,7 +120,7 @@ describe('Authentication Service', function () {
   it('Expect Register To return Success', function () {
     var url = "http://localhost:3000";
     var username = 'Admin';
-    var password = 'Admin';
+    var password = '=QWRtaW4=';
     var responseObj = {
       success: true,
       //token: '',
@@ -140,7 +140,7 @@ describe('Authentication Service', function () {
   it('Expect Register To return false', function () {
     var url = "http://localhost:3000";
     var username = 'Admin';
-    var password = 'Admin';
+    var password = '=QWRtaW4=';
     var responseObj = {
       success: false,
       //token: '',
@@ -160,7 +160,7 @@ describe('Authentication Service', function () {
   it('Expect Register To return error user already exist', function () {
     var url = "http://localhost:3000";
     var username = 'Admin';
-    var password = 'Admin';
+    var password = '=QWRtaW4=';
     var responseObj = {
       success: false,
       //token: '',

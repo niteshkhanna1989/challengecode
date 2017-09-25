@@ -65,7 +65,7 @@ Node
 Mongodb(to run locally)
 
 Project Setup:
-I have included all the dependencies in the project directory itself for ease of use.
+I have included all the bower dependencies in the project directory itself for ease of use.
 However project can be setup through:
 
 run npm install for node related dependencies
@@ -77,6 +77,6 @@ run karma start to run the test cases.
 
 I HAVE ACTIVELY LEFT OUT MINOR DETAILS LIKE SORTING, PASSWORD VALIDATORS AND OTHER SMALL UI FEATURES TO SAVE TIME ON THE CRUD LOGIC FOR THIS DEMO PURPOSE. 
 
-Thanks for the Opportunity, it was a tight squeeze on my end, but managed to get through all of it at the end, looking forward to hear from you. Cheers !! 😊
+
 
 
