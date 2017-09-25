@@ -75,7 +75,12 @@ node server.js to start.
 
 run karma start to run the test cases.
 
-I HAVE ACTIVELY LEFT OUT MINOR DETAILS LIKE SORTING, PASSWORD VALIDATORS AND OTHER SMALL UI FEATURES TO SAVE TIME ON THE CRUD LOGIC FOR THIS DEMO PURPOSE. 
+
+Fixed bugs related to UI grid
+Fixed Search Bugs
+Added Total count Feature to check total count of records found for matching search criteria.
+
+
 
 
 
