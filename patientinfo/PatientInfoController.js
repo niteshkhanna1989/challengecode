@@ -37,7 +37,7 @@ parseParameters = function (req) {
         queryObj['AverageCoveredCharges'] = { $lte: max_average_covered_charges };
     }
     else if (min_average_covered_charges) {
-        queryObj['AverageCoveredCharges'] = { $lte: min_average_covered_charges };
+        queryObj['AverageCoveredCharges'] = { $gte: min_average_covered_charges };
     }
     if (max_average_medicare_payments && min_average_medicare_payments) {
         queryObj['AverageMedicarePayments'] = { $gte: min_average_medicare_payments, $lte: max_average_medicare_payments };
@@ -46,7 +46,7 @@ parseParameters = function (req) {
         queryObj['AverageMedicarePayments'] = { $lte: max_average_medicare_payments };
     }
     else if (min_average_medicare_payments) {
-        queryObj['AverageMedicarePayments'] = { $lte: min_average_medicare_payments };
+        queryObj['AverageMedicarePayments'] = { $gte: min_average_medicare_payments };
     }
 
     return queryObj;
