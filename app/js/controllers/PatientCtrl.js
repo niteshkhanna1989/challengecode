@@ -199,6 +199,7 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 
 		});
 	}
+	// Set Dynamic Width of Columns Based onn Number of Columns
 	function setDynamicWidth(colDefs, datapoint) {
 		if (colDefs.length == 3) {
 
@@ -216,6 +217,8 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 			datapoint.width = "30%";
 		}
 	}
+
+	
 	//Logout of Application
 	function logout() {
 

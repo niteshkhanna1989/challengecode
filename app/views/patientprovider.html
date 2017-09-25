@@ -1,49 +1,49 @@
-
- <div style="margin-top:-20px" class="row">
+<div style="margin-top:-20px" class="row">
 	<div class="col-sm-10">
-			
+
 	</div>
-	<div  class="col-sm-2">
-			<div style="float:right;">
-					<span ng-if="vm.loggedinUser" style="display:inline;font-weight:bold">Hi {{vm.loggedinUser}},</span>
-					<span style="display:inline; "><a ng-click="vm.logout()">LogOut!</a></span>
-					</div>
+	<div class="col-sm-2">
+		<div style="float:right;">
+			<span ng-if="vm.loggedinUser" style="display:inline;font-weight:bold">Hi {{vm.loggedinUser}},</span>
+			<span style="display:inline; "><a ng-click="vm.logout()">LogOut!</a></span>
+		</div>
 		<!-- <div ><div style="font-weight:bold" ng-if="vm.loggedinUser"> Hi {{vm.loggedinUser}},</div><a ng-click="vm.logout()">LogOut!</a></div> -->
 	</div>
-</div> 
-
-<div class="row row-space">
-	<label class="col-sm-2">Minimum Discharges</label>
-	<div class="col-sm-2"><input type="text" ng-model="vm.filter.min_discharges" class="form-control" /></div>
-	<label class="col-sm-2">Maximum Discharges</label>
-	<div class="col-sm-2"><input type="text" ng-model="vm.filter.max_discharges" class="form-control" /></div>
-	<label class="col-sm-1">State</label>
-	<div class="col-sm-2"><input type="text" ng-model="vm.filter.state" class="form-control" /></div>
-
 </div>
-<div style="clear:both"></div>
-<div class="row row-space">
-	<label class="col-sm-2">Min Average Covered Charges</label>
-	<div class="col-sm-2"><input type="text" ng-model="vm.filter.min_avg_covered_charges" class="form-control" /></div>
-	<label class="col-sm-2">Max Average Covered Charges</label>
-	<div class="col-sm-2"><input type="text" ng-model="vm.filter.max_avg_covered_charges" class="form-control" /></div>
+<div class="form-group">
+	<div class="row row-space">
+		<label  class="col-sm-2 control-label">Minimum Discharges</label>
+		<div class="col-sm-2"><input type="number" min="0"  ng-model="vm.filter.min_discharges" class="form-control" /></div>
+		<label   class="col-sm-2 control-label">Maximum Discharges</label>
+		<div class="col-sm-2 "><input type="number"  min="0" ng-model="vm.filter.max_discharges" class="form-control" /></div>
+		<label class="col-sm-1 control-label">State</label>
+		<div class="col-sm-2"><input type="text"  ng-model="vm.filter.state" class="form-control" /></div>
 
-</div>
-<div style="clear:both"></div>
-<div class="row row-space">
-	<label class="col-sm-2">Min Average Medicare Payments</label>
-	<div class="col-sm-2"><input type="text" ng-model="vm.filter.min_avg_medicare_payments" class="form-control" /></div>
-	<label class="col-sm-2">Max Average Medicare Payments</label>
-	<div class="col-sm-2"><input type="text" ng-model="vm.filter.max_avg_medicare_payments" class="form-control" /></div>
-	<div class="col-sm-3"> <button ng-disabled="vm.busy" ng-click="vm.search(false,true)" style="width: 100%" class="btn btn-primary pull-right">Search	<img ng-if="vm.loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></button>
-	
+	</div>
+	<div style="clear:both"></div>
+	<div class="row row-space">
+		<label class="col-sm-2 control-label">Min Average Covered Charges</label>
+		<div class="col-sm-2"><input type="number"  min="0" ng-model="vm.filter.min_avg_covered_charges" class="form-control" /></div>
+		<label class="col-sm-2 control-label">Max Average Covered Charges</label>
+		<div class="col-sm-2"><input type="number"  min="0" ng-model="vm.filter.max_avg_covered_charges" class="form-control" /></div>
+
+	</div>
+	<div style="clear:both"></div>
+	<div class="row row-space">
+		<label class="col-sm-2 control-label">Min Average Medicare Payments</label>
+		<div class="col-sm-2"><input type="number"  min="0" ng-model="vm.filter.min_avg_medicare_payments" class="form-control" /></div>
+		<label class="col-sm-2 control-label">Max Average Medicare Payments</label>
+		<div class="col-sm-2"><input type="number"  min="0" ng-model="vm.filter.max_avg_medicare_payments" class="form-control" /></div>
+		<div class="col-sm-3"> <button ng-disabled="vm.busy" ng-click="vm.search(false,true)" style="width: 100%" class="btn btn-primary pull-right">Search	<img ng-if="vm.loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></button>
+
+		</div>
 	</div>
 </div>
 <div style="clear:both"></div>
 <div class="row row-space">
 	<label class="col-sm-2">Select Datapoints</label>
 	<div class="col-sm-9">
-		<ui-select multiple  ng-model="vm.selectedDataPoints" theme="bootstrap" close-on-select="false" title="Select Datapoints...">
+		<ui-select multiple ng-model="vm.selectedDataPoints" theme="bootstrap" close-on-select="false" title="Select Datapoints...">
 			<ui-select-match placeholder="Select Datapoints...">{{$item.name}}</ui-select-match>
 			<ui-select-choices repeat="datapoint in vm.dataPoints | filter:$select.search">
 				{{datapoint.name}}
@@ -53,10 +53,11 @@
 	<div style="clear:both"></div>
 </div>
 
-<div class="row"><h4>Providers Data</h4></div>
+<div class="row">
+	<h4>Providers Data</h4>
+</div>
 
 <div class="row">
-		<div id="grid1" ui-grid="vm.gridOptions" ui-grid-infinite-scroll ui-grid-resize-columns class="grid" ng-if="vm.gridOptions"></div>
-		<span> &nbsp; &nbsp; Pages: {{ vm.page }} &nbsp; &nbsp;&nbsp; Records Fetched: {{ vm.recordsCount}} &nbsp; &nbsp;&nbsp; Total Records: {{ vm.totalCount}} </span>
-	</div>
-
+	<div id="grid1" ui-grid="vm.gridOptions" ui-grid-infinite-scroll ui-grid-resize-columns class="grid" ng-if="vm.gridOptions"></div>
+	<span> &nbsp; &nbsp; Pages: {{ vm.page }} &nbsp; &nbsp;&nbsp; Records Fetched: {{ vm.recordsCount}} &nbsp; &nbsp;&nbsp; Total Records: {{ vm.totalCount}} </span>
+</div>
