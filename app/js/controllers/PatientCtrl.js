@@ -247,10 +247,14 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 		var ifError=false;
 		for (var property in vm.filter) {
             if (vm.filter.hasOwnProperty(property)) {
-                if ((vm.filter[property] <0 ||vm.filter[property]==undefined)&& property!=="state" ) {
+				
+                if ((vm.filter[property] <0 ||vm.filter[property]===undefined)&& property!=="state" ) {
 				   vm.showError=true;
 				   ifError=true;
-                }
+				}
+				if(vm.filter[property]===null){
+					vm.filter[property]='';
+				}
             }
 		}
 		return ifError;
