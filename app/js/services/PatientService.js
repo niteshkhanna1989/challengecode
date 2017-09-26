@@ -25,7 +25,7 @@ angular.module('PatientService', []).factory('PatientService', ['$http', '$local
         var querystring = '';
         for (var property in filterObj) {
             if (filterObj.hasOwnProperty(property)) {
-                if (filterObj[property] != '' && filterObj[property]!=null) {
+                if (filterObj[property] !== '' && filterObj[property]!==null) {
                     querystring += property + "=" + filterObj[property] + "&";
                 }
             }

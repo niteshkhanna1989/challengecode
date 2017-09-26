@@ -11,6 +11,7 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 	vm.filter.min_avg_covered_charges = '';
 	vm.filter.max_avg_medicare_payments = '';
 	vm.filter.min_avg_medicare_payments = '';
+	vm.showError=false;
 	vm.dataPoints = [{ name: "DRGDefinition", value: "DRG Definition", width: '30%', minWidth: 120 }, { name: "ProviderId", value: "Provider ID", width: '30%', minWidth: 70 }, { name: "ProviderName", value: "Provider Name", width: '30%', minWidth: 120 }, { name: "ProviderStreetAddress", value: "Provider Street Address", width: '30%', minWidth: 120 },
 	{ name: "ProviderCity", value: "Provider City", width: '30%', minWidth: 70 }, { name: "ProviderState", value: "Provider State", width: '30%', minWidth: 70 }, { name: "ProviderZipCode", value: "Provider Zip Code", width: '30%', minWidth: 70 }, { name: "HospitalReferralRegionDescription", value: "Hospital Referral Region Description", width: '30%', minWidth: 120 }, { name: "TotalDischarges", value: "Total Discharges", width: '30%', minWidth: 70 },
 	{ name: "AverageCoveredCharges", value: "Average Covered Charges", width: '30%', minWidth: 70 },
@@ -22,10 +23,11 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 	vm.getNextPage = getNextPage;
 	vm.logout = logout;
 	vm.scroll = scroll;
+	//vm.setDollar=setDollar;
 	$scope.data = [];
 	$scope.cols = [];
 	vm.recordsCount = 0;
-	vm.totalCount=0;
+	vm.totalCount = 0;
 	vm.firstTime = true;
 	vm.loading = false;
 	// Initial Code Run 
@@ -50,8 +52,11 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 	}
 	//Search function to get initial data and on search click
 	function search(firstTime, fromClick) {
-		vm.recordsCount=0;
-		vm.totalCount=0;
+		vm.showError=false;
+		if(validateForm())
+		return false;
+		vm.recordsCount = 0;
+		vm.totalCount = 0;
 		vm.page = 0;
 		vm.busy = true;
 		if (fromClick) {
@@ -101,7 +106,13 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 						$scope.cols.push(datapoint);
 					}
 				});
-				$scope.data = response.data.data;
+				if (response.data.data.length > 0) {
+					$scope.data = setDollar(response.data.data);
+				}
+				else {
+					$scope.data = response.data.data;
+				}
+
 
 				vm.gridOptions = {
 					infiniteScrollRowsFromEnd: 10,
@@ -129,16 +140,10 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 				}
 
 				vm.recordsCount = vm.gridOptions.data.length;
-				vm.totalCount=response.data.totalCount;
+				vm.totalCount = response.data.totalCount;
 				vm.busy = false;
 				vm.loading = false;
 				vm.firstTime = false;
-
-
-
-
-
-				//vm.patientProviderData.push({ rows: response.data, cols:  });
 			}
 
 
@@ -149,11 +154,9 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 
 	}
 	$scope.$watch('vm.selectedDataPoints', function () {
-
-		//	vm.gridOptions.data = [];
 		if (!vm.firstTime) {
 			vm.page = 0;
-			search(vm.firstTime,false);
+			search(vm.firstTime, false);
 		}
 
 	});
@@ -185,11 +188,17 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 				});
 				vm.busy = false;
 				vm.page += 1;
-				vm.gridOptions.data = vm.gridOptions.data.concat(response.data.data);
+				if (response.data.data.length > 0) {
+					vm.gridOptions.data = vm.gridOptions.data.concat(setDollar(response.data.data));
+				}
+				else {
+					vm.gridOptions.data = vm.gridOptions.data.concat(response.data.data);
+				}
+
 				$scope.gridApi.infiniteScroll.dataLoaded();
 
 				vm.recordsCount = vm.gridOptions.data.length;
-				vm.totalCount=response.data.totalCount;
+				vm.totalCount = response.data.totalCount;
 				//	vm.patientProviderData.push({rows:response.data,cols:Object.keys(response.data[0])});
 
 			}
@@ -218,7 +227,38 @@ angular.module('PatientCtrl', ['PatientService', 'AuthenticationService']).contr
 		}
 	}
 
-	
+
+	function setDollar(data) {
+
+		angular.forEach(data, function (row) {
+			if (row.AverageCoveredCharges)
+				row.AverageCoveredCharges = addDollar(row.AverageCoveredCharges);
+			if (row.AverageMedicarePayments)
+				row.AverageMedicarePayments = addDollar(row.AverageMedicarePayments);
+			if (row.AverageTotalPayments)
+				row.AverageTotalPayments = addDollar(row.AverageTotalPayments);
+		});
+		return data;
+
+	}
+
+	function validateForm()
+	{
+		var ifError=false;
+		for (var property in vm.filter) {
+            if (vm.filter.hasOwnProperty(property)) {
+                if ((vm.filter[property] <0 ||vm.filter[property]==undefined)&& property!=="state" ) {
+				   vm.showError=true;
+				   ifError=true;
+                }
+            }
+		}
+		return ifError;
+	}
+	function addDollar(val) {
+		return '$' + val.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+	}
+
 	//Logout of Application
 	function logout() {
 

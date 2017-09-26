@@ -13,9 +13,9 @@
 <div class="form-group">
 	<div class="row row-space">
 		<label  class="col-sm-2 control-label">Minimum Discharges</label>
-		<div class="col-sm-2"><input type="number" min="0"  ng-model="vm.filter.min_discharges" class="form-control" /></div>
+		<div class="col-sm-2"><input type="number"   ng-model="vm.filter.min_discharges" class="form-control" /></div>
 		<label   class="col-sm-2 control-label">Maximum Discharges</label>
-		<div class="col-sm-2 "><input type="number"  min="0" ng-model="vm.filter.max_discharges" class="form-control" /></div>
+		<div class="col-sm-2 "><input type="number"   ng-model="vm.filter.max_discharges" class="form-control" /></div>
 		<label class="col-sm-1 control-label">State</label>
 		<div class="col-sm-2"><input type="text"  ng-model="vm.filter.state" class="form-control" /></div>
 
@@ -23,22 +23,23 @@
 	<div style="clear:both"></div>
 	<div class="row row-space">
 		<label class="col-sm-2 control-label">Min Average Covered Charges</label>
-		<div class="col-sm-2"><input type="number"  min="0" ng-model="vm.filter.min_avg_covered_charges" class="form-control" /></div>
+		<div class="col-sm-2"><input type="number"   ng-model="vm.filter.min_avg_covered_charges" class="form-control" /></div>
 		<label class="col-sm-2 control-label">Max Average Covered Charges</label>
-		<div class="col-sm-2"><input type="number"  min="0" ng-model="vm.filter.max_avg_covered_charges" class="form-control" /></div>
+		<div class="col-sm-2"><input type="number"   ng-model="vm.filter.max_avg_covered_charges" class="form-control" /></div>
 
 	</div>
 	<div style="clear:both"></div>
 	<div class="row row-space">
 		<label class="col-sm-2 control-label">Min Average Medicare Payments</label>
-		<div class="col-sm-2"><input type="number"  min="0" ng-model="vm.filter.min_avg_medicare_payments" class="form-control" /></div>
+		<div class="col-sm-2"><input type="number"  ng-model="vm.filter.min_avg_medicare_payments" class="form-control" /></div>
 		<label class="col-sm-2 control-label">Max Average Medicare Payments</label>
-		<div class="col-sm-2"><input type="number"  min="0" ng-model="vm.filter.max_avg_medicare_payments" class="form-control" /></div>
+		<div class="col-sm-2"><input type="number" ng-model="vm.filter.max_avg_medicare_payments" class="form-control" /></div>
 		<div class="col-sm-3"> <button ng-disabled="vm.busy" ng-click="vm.search(false,true)" style="width: 100%" class="btn btn-primary pull-right">Search	<img ng-if="vm.loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></button>
-
+			
 		</div>
 	</div>
 </div>
+<div ng-if="vm.showError" style="text-align:center" class="alert alert-danger ">Invalid Values in Search Criteria</div>
 <div style="clear:both"></div>
 <div class="row row-space">
 	<label class="col-sm-2">Select Datapoints</label>
