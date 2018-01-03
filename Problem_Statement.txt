@@ -1,0 +1,71 @@
+Overview
+This problem is designed to test the candidates ability to tackle problem-sets similar to those Engineers face. The instructions are left ambiguous on purpose and are meant to give the developer freedom to design, implement, and test their solution .
+
+Instructions
+You have been asked to assist in the creation of an internal API & Search page for a national healthcare provider. This provider has a set of inpatient prospective payment systems providers. We want to implement an API that allows for various methods of querying this data, and a search page to show the results. You should use a database to store this data
+
+API:
+The API should support multiple queries at the same time, and should only restrict the dataset. All values are inclusive and must be ingested in the manner shown below.
+
+GET /providers?max_discharges=5&min_discharges=6&max_average_covered_charges=50000
+&min_average_covered_charges=40000&min_average_medicare_payments=6000
+&max_average_medicare_payments=10000&state=GA
+NOTE the line breaks are there just for readability. In reality this is one long querystring
+
+Frontend Component
+To allow for querying of the data, we want to build a responsive webpage that implements a search feature that hits your new API. This search page should:
+
+Be responsive based on the screen it's being viewed on
+Expose the ability to fill in search filters and execute the queries listed below
+Expose the results of a search somewhere on the page in a good, readable format
+If you have time (or just want to impress us), feel free to implement the following features:
+
+Bonus Implement a feature to select which fields are returned during an api request. For instance if I want to search on state=ga and only show the Provider Name in the response, you should implement a way to achieve this feature such that the Provider Name for each results is the only thing listed.
+Bonus Login Page to access the Search Feature as well as secure tokens to keep unauthorized users from querying the API. Implement a login page to access the API. Once authorized, all requests to the API should be token based and secure. Implementation details are left to the engineer.
+Query parameters
+Parameter	Description
+max_discharges	The maximum number of Total Discharges
+min_discharges	The minimum number of Total Discharges
+max_average_covered_charges	The maximum Average Covered Charges
+min_average_covered_charges	The minimum Average Covered Charges
+max_average_medicare_payments	The maximum Average Medicare Payment
+min_average_medicare_payments	The minimum Average Medicare Payment
+state	The exact state that the provider is from
+#####The expected response is a JSON blob containing the list of providers meeting the criteria. All query parameters are optional. Min and Max fields are inclusive.
+
+NOTE if you decide to implement the bonus of allowing for the selection of which fields are returned from a query, this data will be slimmed down based on that selection. If nothing is selected, then return all data.
+
+[
+	{
+		"Provider Name": "SOUTHEAST ALABAMA MEDICAL CENTER",
+		"Provider Street Address": "1108 ROSS CLARK CIRCLE",
+		"Provider City": "DOTHAN",
+		"Provider State": "AL",
+		"Provider Zip Code": "36301",	
+		"Hospital Referral Region Description": "AL - Dothan",
+		"Total Discharges": 91,
+		"Average Covered Charges": "$32,963.07", 
+		"Average Total Payments": 	"$5,777.24",
+		"Average Medicare Payments": "$4,763.73"
+	},
+	{
+		"Provider Name": "MARSHALL MEDICAL CENTER SOUTH",
+		"Provider Street Address": "2505 U S HIGHWAY 431 NORTH",
+		"Provider City": "BOAZ",
+		"Provider State": "AL",
+		"Provider Zip Code": "35957",	
+		"Hospital Referral Region Description": "AL - Birmingham",
+		"Total Discharges": 14,
+		"Average Covered Charges": "$32,963.07", 
+		"Average Total Payments": 	"$5,777.24",
+		"Average Medicare Payments": "$4,763.73"
+	}
+	
+]
+Deliverables
+An API endpoint that implements the url ending with /providers
+Every possible combination of query string parameters works
+Some datastore is used
+All responsive pages implemented (as well as any HTML/CSS/Javascript associated with it)
+Automated tests (i.e. tests that can be run from command line)
+A writeup/README describing your architecture, solutions, and assumptions made. Be as thorough as possible with your explanation.
