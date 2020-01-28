@@ -1,5 +1,4 @@
-# challengecode
-Challenge Code for Company
+
 
 Live Demo:
 https://patientproviders.herokuapp.com
