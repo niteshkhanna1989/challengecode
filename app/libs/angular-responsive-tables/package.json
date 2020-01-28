@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/awerlang/angular-responsive-tables",
   "devDependencies": {
-    "clean-css": "^3.2.10",
+    "clean-css": "^4.2.3",
     "conventional-changelog": "0.0.17",
     "jasmine-core": "^2.2.0",
     "karma": "^0.12.31",
